@@ -1,0 +1,10 @@
+<script>
+    let body = document.body;
+  
+    body.innerHTML = "<!--" + body.tagName + "-->";
+  
+    alert( body.firstChild.data );
+  </script>
+
+  <!-- выведет BODY, вставится комментарий с BODY внутри и он первый потомок
+и его data = "BODY" -->

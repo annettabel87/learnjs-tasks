@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>         
+      <script>
+        const ulElement = document.createElement('ul');
+        document.body.append(ulElement);
+
+        while (true) {
+            const text = prompt("Введите текст", "");
+            if (!text) {
+                 break;
+            }
+
+            const liElement = document.createElement('li');
+            liElement.textContent = text;
+            ulElement.append(liElement);
+        }
+      </script>
+</body>
+</html>

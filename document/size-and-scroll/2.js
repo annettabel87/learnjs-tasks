@@ -1,0 +1,1 @@
+const width = elem.offsetWidth - elem.clientWidth;

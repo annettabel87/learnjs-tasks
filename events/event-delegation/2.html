@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-size: 18px;
+        }
+
+        span {
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+        span:hover {
+            color: #44add6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul class="tree" id="tree">
+        <li><span>Животные</span>
+            <ul>
+                <li><span>Млекопитающие</span>
+                    <ul>
+                        <li>Коровы</li>
+                        <li>Ослы</li>
+                        <li>Собаки</li>
+                        <li>Тигры</li>
+                    </ul>
+                </li>
+                <li><span>Другие</span>
+                    <ul>
+                        <li>Змеи</li>
+                        <li>Птицы</li>
+                        <li>Ящерицы</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><span>Рыбы</span>
+            <ul>
+                <li><span>Аквариумные</span>
+                    <ul>
+                        <li>Гуппи</li>
+                        <li>Скалярии</li>
+                    </ul>
+                </li>
+                <li><span>Морские</span>
+                    <ul>
+                        <li>Морская форель</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        const tree = document.getElementById('tree');
+
+        const hiddenHandler = (e) => {
+            const target = e.target;
+            if (target.tagName != 'SPAN') return;
+
+            const childrenContainer = target.parentNode.querySelector('ul');
+            if (!childrenContainer) return;
+
+            childrenContainer.hidden = !childrenContainer.hidden;
+        }
+
+        tree.addEventListener('click', hiddenHandler)
+    </script>
+</body>
+
+</html>

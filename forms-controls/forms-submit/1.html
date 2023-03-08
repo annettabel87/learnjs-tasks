@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="1.css">
+</head>
+
+<body>
+    <input type="button" value="Кликните, чтобы увидеть форму" id="show-button">
+
+    <div id="prompt-form-container">
+        <form id="prompt-form">
+            <div id="prompt-message"></div>
+            <input name="text" type="text">
+            <input type="submit" value="Ok">
+            <input type="button" name="cancel" value="Отмена">
+        </form>
+    </div>
+
+    <script>
+        const container = document.getElementById('prompt-form-container');
+        const form = document.getElementById('prompt-form');
+
+        const bodyColor = document.body.style.backgroundImage;
+
+        const showCover = () => {
+            const coverDiv = document.createElement('div');
+
+            coverDiv.id = 'cover-div';
+            document.body.style.overflowY = 'hidden';
+
+            document.body.append(coverDiv);
+        }
+
+        const hideCover = () => {
+            document.getElementById('cover-div').remove();
+            document.body.style.overflowY = '';
+        }
+
+        function showPrompt(html, callback) {
+            showCover();
+
+            const message = document.getElementById('prompt-message');
+            message.innerHTML = html;
+            message.value = '';
+
+            form.addEventListener('submit', () => {
+                const value = form.text.value;
+                if (value == '') return false;
+                callback(form.text.value);
+                hideCover();
+                container.style.display = 'none';
+                document.onkeydown = null;
+                return false;
+            })
+
+            form.cancel.addEventListener('click', () => {
+                callback(null);
+                hideCover();
+                container.style.display = 'none';
+                document.onkeydown = null;
+            });
+
+            let lastElem = form.elements[form.elements.length - 1];
+            let firstElem = form.elements[0];
+
+            lastElem.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab' && !e.shiftKey) {
+                    firstElem.focus();
+                    return false;
+                }
+            })
+
+            firstElem.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab' && e.shiftKey) {
+                    lastElem.focus();
+                    return false;
+                }
+            })
+
+            container.style.display = 'block';
+            form.elements.text.focus();
+        }
+
+        document.getElementById('show-button').onclick = function () {
+            showPrompt("Введите что-нибудь<br>...умное :)", function (value) {
+                alert("Вы ввели: " + value);
+            });
+        };
+    </script>
+</body>
+
+</html>

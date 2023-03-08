@@ -1,0 +1,13 @@
+.edit {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    white-space: nowrap;   
+    resize: none;
+    overflow: auto; 
+  }
+
+  .btn__block {
+    position: absolute;
+  }

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        #mouse {
+            display: inline-block;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        #mouse:focus {
+            outline: 1px dashed black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>Кликните по "изображению" мыши и перемещайте её с помощью клавиш со стрелками.</p>
+
+    <pre id="mouse">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+</pre>
+
+
+    <script>
+        const mouse = document.getElementById('mouse');
+        mouse.tabIndex = 0;
+
+        const clickHandler = (element) => {
+            element.style.left = element.getBoundingClientRect().left + 'px';
+            element.style.top = element.getBoundingClientRect().top + 'px';
+            element.style.position = 'fixed';
+            element.focus();
+        }
+
+        const movingHandler = (e, element) => {
+
+            switch (e.key) {
+                case 'ArrowDown':
+                    element.style.top = parseInt(element.style.top) + element.offsetHeight + 'px';
+                    return false;
+
+                case 'ArrowUp':
+                    element.style.top = parseInt(element.style.top) - element.offsetHeight + 'px';
+                    return false;
+
+                case 'ArrowRight':
+                    element.style.left = parseInt(element.style.left) + element.offsetWidth + 'px';
+                    return false;
+
+                case 'ArrowLeft':
+                    element.style.left = parseInt(element.style.left) - element.offsetWidth + 'px';
+                    return false;
+            }
+        }
+        mouse.addEventListener('click', clickHandler(mouse));
+        mouse.addEventListener('keydown', (e) => movingHandler(e, mouse));
+    </script>
+
+</body>
+
+</html>

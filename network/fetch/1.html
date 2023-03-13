@@ -1,0 +1,19 @@
+<!doctype html>
+<script src="https://ru.js.cx/test/libs.js"></script>
+<script>
+
+    async function getUsers(names) {
+        const responses = await Promise.all(names.map(name => fetch(`https://api.github.com/users/${name}`)));
+
+        return await Promise.all(responses.map(response => response.json()));
+    };
+
+    async function test() {
+        let users = await getUsers(['iliakan', 'remy', 'no.such.users']);
+        console.log(users);
+    };
+
+    test();
+</script>
+
+</html>
